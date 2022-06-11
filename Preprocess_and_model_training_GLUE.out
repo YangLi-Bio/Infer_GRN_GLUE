@@ -1,0 +1,51 @@
+OMP: Info #277: omp_set_nested routine deprecated, please use omp_set_max_active_levels instead.
+/users/PAS1475/liyang/.conda/envs/GLUE_env/lib/python3.9/site-packages/sklearn/utils/extmath.py:369: FutureWarning: If 'random_state' is not supplied, the current default is to use 0 as a fixed seed. This will change to  None in version 1.2 leading to non-deterministic results that better reflect nature of the randomized_svd solver. If you want to silence this warning, set 'random_state' to an integer seed or to None explicitly depending if you want your code to be deterministic or not.
+  warnings.warn(
+  0%|          | 0/28930 [00:00<?, ?it/s]  1%|          | 193/28930 [00:00<00:45, 631.79it/s]  4%|▍         | 1245/28930 [00:00<00:07, 3775.73it/s]  8%|▊         | 2211/28930 [00:00<00:04, 5613.38it/s] 11%|█         | 3051/28930 [00:00<00:03, 6469.78it/s] 14%|█▎        | 3962/28930 [00:00<00:03, 7272.05it/s] 18%|█▊        | 5235/28930 [00:00<00:02, 8930.17it/s] 22%|██▏       | 6226/28930 [00:00<00:02, 8642.11it/s] 25%|██▍       | 7188/28930 [00:01<00:02, 8921.68it/s] 28%|██▊       | 8129/28930 [00:01<00:02, 8863.29it/s] 31%|███▏      | 9049/28930 [00:01<00:02, 8174.71it/s] 34%|███▍      | 9907/28930 [00:01<00:02, 8285.42it/s] 38%|███▊      | 11091/28930 [00:01<00:01, 9284.07it/s] 42%|████▏     | 12044/28930 [00:01<00:02, 8427.90it/s] 45%|████▍     | 13013/28930 [00:01<00:01, 8766.41it/s] 48%|████▊     | 13915/28930 [00:02<00:02, 5184.37it/s] 52%|█████▏    | 14965/28930 [00:02<00:02, 6188.42it/s] 56%|█████▌    | 16177/28930 [00:02<00:01, 7448.46it/s] 60%|██████    | 17416/28930 [00:02<00:01, 8578.79it/s] 64%|██████▎   | 18437/28930 [00:02<00:01, 8979.94it/s] 68%|██████▊   | 19546/28930 [00:02<00:00, 9527.98it/s] 71%|███████▏  | 20656/28930 [00:02<00:00, 9955.33it/s] 75%|███████▌  | 21721/28930 [00:02<00:00, 9790.48it/s] 79%|███████▊  | 22749/28930 [00:02<00:00, 9753.23it/s] 83%|████████▎ | 23973/28930 [00:02<00:00, 10451.99it/s] 87%|████████▋ | 25047/28930 [00:03<00:00, 9789.59it/s]  90%|█████████ | 26054/28930 [00:03<00:00, 9666.53it/s] 93%|█████████▎| 27040/28930 [00:03<00:00, 9590.49it/s]100%|██████████| 28930/28930 [00:03<00:00, 8462.64it/s]
+('Xkr4', 'chr1:3210899-3211332', 0): {'dist': 0, 'weight': 1.0, 'sign': 1, 'type': 'fwd'}
+('Xkr4', 'chr1:3216313-3216806', 0): {'dist': 0, 'weight': 1.0, 'sign': 1, 'type': 'fwd'}
+('Xkr4', 'chr1:3217279-3217678', 0): {'dist': 0, 'weight': 1.0, 'sign': 1, 'type': 'fwd'}
+('Xkr4', 'chr1:3228082-3228372', 0): {'dist': 0, 'weight': 1.0, 'sign': 1, 'type': 'fwd'}
+('Xkr4', 'chr1:3265226-3265683', 0): {'dist': 0, 'weight': 1.0, 'sign': 1, 'type': 'fwd'}
+[INFO] fit_SCGLUE: Pretraining SCGLUE model...
+[INFO] autodevice: Using GPU 0 as computation device.
+[INFO] SCGLUEModel: Setting `graph_batch_size` = 27025
+[INFO] SCGLUEModel: Setting `max_epochs` = 186
+[INFO] SCGLUEModel: Setting `patience` = 16
+[INFO] SCGLUEModel: Setting `reduce_lr_patience` = 8
+[INFO] SCGLUETrainer: Using training directory: "glue/pretrain"
+/users/PAS1475/liyang/.conda/envs/GLUE_env/lib/python3.9/site-packages/torch/distributions/negative_binomial.py:97: UserWarning: Specified kernel cache directory could not be created! This disables kernel caching. Specified directory is /users/PAS1475/liyang/.cache/torch/kernels. This warning will appear only once per process. (Triggered internally at  /opt/conda/conda-bld/pytorch_1646756402876/work/aten/src/ATen/native/cuda/jit_utils.cpp:860.)
+  log_normalization = (-torch.lgamma(self.total_count + value) + torch.lgamma(1. + value) +
+[INFO] SCGLUETrainer: [Epoch 10] train={'g_nll': 0.451, 'g_kl': 0.004, 'g_elbo': 0.456, 'x_rna_nll': 0.165, 'x_rna_kl': 0.006, 'x_rna_elbo': 0.171, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.041, 'dsc_loss': 0.692, 'vae_loss': 0.23, 'gen_loss': 0.195}, val={'g_nll': 0.448, 'g_kl': 0.004, 'g_elbo': 0.453, 'x_rna_nll': 0.165, 'x_rna_kl': 0.006, 'x_rna_elbo': 0.171, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.694, 'vae_loss': 0.229, 'gen_loss': 0.195}, 5.6s elapsed
+[INFO] SCGLUETrainer: [Epoch 20] train={'g_nll': 0.43, 'g_kl': 0.004, 'g_elbo': 0.434, 'x_rna_nll': 0.163, 'x_rna_kl': 0.006, 'x_rna_elbo': 0.169, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.693, 'vae_loss': 0.227, 'gen_loss': 0.192}, val={'g_nll': 0.43, 'g_kl': 0.004, 'g_elbo': 0.434, 'x_rna_nll': 0.162, 'x_rna_kl': 0.006, 'x_rna_elbo': 0.169, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.693, 'vae_loss': 0.226, 'gen_loss': 0.191}, 5.6s elapsed
+[INFO] SCGLUETrainer: [Epoch 30] train={'g_nll': 0.422, 'g_kl': 0.004, 'g_elbo': 0.426, 'x_rna_nll': 0.162, 'x_rna_kl': 0.006, 'x_rna_elbo': 0.168, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.693, 'vae_loss': 0.225, 'gen_loss': 0.19}, val={'g_nll': 0.421, 'g_kl': 0.004, 'g_elbo': 0.425, 'x_rna_nll': 0.165, 'x_rna_kl': 0.006, 'x_rna_elbo': 0.171, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.695, 'vae_loss': 0.228, 'gen_loss': 0.193}, 4.5s elapsed
+Epoch 00034: reducing learning rate of group 0 to 2.0000e-04.
+Epoch 00034: reducing learning rate of group 0 to 2.0000e-04.
+[INFO] LRScheduler: Learning rate reduction: step 1
+[INFO] SCGLUETrainer: [Epoch 40] train={'g_nll': 0.418, 'g_kl': 0.004, 'g_elbo': 0.422, 'x_rna_nll': 0.161, 'x_rna_kl': 0.006, 'x_rna_elbo': 0.167, 'x_atac_nll': 0.039, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.693, 'vae_loss': 0.224, 'gen_loss': 0.189}, val={'g_nll': 0.419, 'g_kl': 0.004, 'g_elbo': 0.422, 'x_rna_nll': 0.163, 'x_rna_kl': 0.006, 'x_rna_elbo': 0.169, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.693, 'vae_loss': 0.226, 'gen_loss': 0.191}, 4.8s elapsed
+Epoch 00045: reducing learning rate of group 0 to 2.0000e-05.
+Epoch 00045: reducing learning rate of group 0 to 2.0000e-05.
+[INFO] LRScheduler: Learning rate reduction: step 2
+[INFO] SCGLUETrainer: [Epoch 50] train={'g_nll': 0.418, 'g_kl': 0.004, 'g_elbo': 0.422, 'x_rna_nll': 0.161, 'x_rna_kl': 0.006, 'x_rna_elbo': 0.167, 'x_atac_nll': 0.039, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.693, 'vae_loss': 0.223, 'gen_loss': 0.188}, val={'g_nll': 0.418, 'g_kl': 0.004, 'g_elbo': 0.421, 'x_rna_nll': 0.161, 'x_rna_kl': 0.006, 'x_rna_elbo': 0.167, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.693, 'vae_loss': 0.224, 'gen_loss': 0.189}, 5.6s elapsed
+2022-06-11 14:39:18,526 ignite.handlers.early_stopping.EarlyStopping INFO: EarlyStopping: Stop training
+[INFO] EarlyStopping: Restoring checkpoint "52"...
+[INFO] fit_SCGLUE: Estimating balancing weight...
+[INFO] estimate_balancing_weight: Clustering cells...
+OMP: Info #277: omp_set_nested routine deprecated, please use omp_set_max_active_levels instead.
+[INFO] estimate_balancing_weight: Matching clusters...
+[INFO] estimate_balancing_weight: Matching array shape = (17, 17)...
+[INFO] estimate_balancing_weight: Estimating balancing weight...
+[INFO] fit_SCGLUE: Fine-tuning SCGLUE model...
+[INFO] SCGLUEModel: Setting `graph_batch_size` = 27025
+[INFO] SCGLUEModel: Setting `align_burnin` = 31
+[INFO] SCGLUEModel: Setting `max_epochs` = 186
+[INFO] SCGLUEModel: Setting `patience` = 16
+[INFO] SCGLUEModel: Setting `reduce_lr_patience` = 8
+[INFO] SCGLUETrainer: Using training directory: "glue/fine-tune"
+[INFO] SCGLUETrainer: [Epoch 10] train={'g_nll': 0.416, 'g_kl': 0.004, 'g_elbo': 0.419, 'x_rna_nll': 0.161, 'x_rna_kl': 0.006, 'x_rna_elbo': 0.167, 'x_atac_nll': 0.039, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.694, 'vae_loss': 0.223, 'gen_loss': 0.188}, val={'g_nll': 0.416, 'g_kl': 0.004, 'g_elbo': 0.419, 'x_rna_nll': 0.161, 'x_rna_kl': 0.006, 'x_rna_elbo': 0.167, 'x_atac_nll': 0.039, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.67, 'vae_loss': 0.223, 'gen_loss': 0.19}, 4.5s elapsed
+[INFO] SCGLUETrainer: [Epoch 20] train={'g_nll': 0.413, 'g_kl': 0.004, 'g_elbo': 0.416, 'x_rna_nll': 0.162, 'x_rna_kl': 0.006, 'x_rna_elbo': 0.167, 'x_atac_nll': 0.039, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.694, 'vae_loss': 0.223, 'gen_loss': 0.189}, val={'g_nll': 0.413, 'g_kl': 0.004, 'g_elbo': 0.417, 'x_rna_nll': 0.162, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.167, 'x_atac_nll': 0.039, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.668, 'vae_loss': 0.223, 'gen_loss': 0.19}, 4.5s elapsed
+[INFO] SCGLUETrainer: [Epoch 30] train={'g_nll': 0.41, 'g_kl': 0.004, 'g_elbo': 0.414, 'x_rna_nll': 0.161, 'x_rna_kl': 0.006, 'x_rna_elbo': 0.166, 'x_atac_nll': 0.039, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.693, 'vae_loss': 0.223, 'gen_loss': 0.188}, val={'g_nll': 0.41, 'g_kl': 0.004, 'g_elbo': 0.414, 'x_rna_nll': 0.164, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.17, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.672, 'vae_loss': 0.226, 'gen_loss': 0.193}, 4.5s elapsed
+[INFO] SCGLUETrainer: [Epoch 40] train={'g_nll': 0.409, 'g_kl': 0.004, 'g_elbo': 0.413, 'x_rna_nll': 0.161, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.166, 'x_atac_nll': 0.039, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.695, 'vae_loss': 0.223, 'gen_loss': 0.188}, val={'g_nll': 0.409, 'g_kl': 0.004, 'g_elbo': 0.413, 'x_rna_nll': 0.163, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.168, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.674, 'vae_loss': 0.225, 'gen_loss': 0.191}, 4.4s elapsed
+Epoch 00045: reducing learning rate of group 0 to 2.0000e-04.
+Epoch 00045: reducing learning rate of group 0 to 2.0000e-04.
+[INFO] LRScheduler: Learning rate reduction: step 1
