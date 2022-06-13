@@ -14,89 +14,136 @@
 # ---
 
 
-# Import modules
-import anndata # save sequencing data
-import networkx as nx # graph algorithms
-import scanpy as sc # abbreviation?
+# Modules
+import functools #  higher-order functions that work on other functions
+import itertools #  implements a number of iterator building blocks inspired by constructs 
+# from APL, Haskell, and SML
+
+import os # The design of all built-in operating system dependent modules
+
+import anndata
+import networkx as nx
+import numpy as np
+import pandas as pd
+import scanpy as sc
+from matplotlib import rcParams
+from networkx.algorithms.bipartite import biadjacency_matrix
+
 import scglue
-from matplotlib import rcParams # visualization
 
 
-# Parameters
-scglue.plot.set_publication_params() # ?
-rcParams["figure.figsize"] = (4, 4) # figure sizes
+# %%
+scglue.plot.set_publication_params()
+rcParams["figure.figsize"] = (4, 4)
 
 
-# Load expression and accessibility data
+# Load data
 rna = anndata.read_h5ad("/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/Chen-2019-RNA.h5ad")
 rna.X, rna.obs, rna.var
 atac = anndata.read_h5ad("/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/Chen-2019-ATAC.h5ad")
 atac.X, atac.obs, atac.var
 
 
-# Preprocess scRNA-seq data
-rna.X, rna.X.data # showcase the memory
-rna.layers["counts"] = rna.X.copy() # back up the matrix in counts
-sc.pp.highly_variable_genes(rna, n_top_genes=2000, flavor="seurat_v3") # flavor : Seurat, Seurat3, and CellRanger
-sc.pp.normalize_total(rna) # Normalize each cell by total counts over all genes
-sc.pp.log1p(rna) # logarithm
-sc.pp.scale(rna) # unit variance and zero mean
-sc.tl.pca(rna, n_comps=100, svd_solver="auto")
-sc.pp.neighbors(rna, metric="cosine") # Compute a neighborhood graph of observations
+# # Set cell types and chromosomes
+# rna.obs["cell_type"].cat.categories
+# 
+# # %%
+# used_cts = {
+#     "CD4 Naive", "CD4 TCM", "CD4 TEM", "CD8 Naive", "CD8 TEM_1", "CD8 TEM_2",
+#     "CD14 Mono", "CD16 Mono", "Memory B", "Naive B"
+# }  # To match cell types covered in PC Hi-C
+# used_chroms = {f"chr{x}" for x in range(1, 23)}.union({"chrX"})
+# 
+# # %%
+# rna = rna[
+#     [item in used_cts for item in rna.obs["cell_type"]],
+#     [item in used_chroms for item in rna.var["chrom"]]
+# ]
+
+sc.pp.filter_genes(rna, min_counts=1)
+rna.obs_names += "-RNA"
+
+# rna
+# 
+# # %%
+# atac = atac[
+#     [item in used_cts for item in atac.obs["cell_type"]],
+#     [item in used_chroms for item in atac.var["chrom"]]
+# ]
+
+sc.pp.filter_genes(atac, min_counts=1)
+atac.obs_names += "-ATAC"
+
+# atac
+
+
+# Genes, CREs, promoters, and TSSs
+genes = scglue.genomics.Bed(rna.var.assign(name=rna.var_names))
+peaks = scglue.genomics.Bed(atac.var.assign(name=atac.var_names))
+tss = genes.strand_specific_start_site()
+promoters = tss.expand(2000, 0)
+
+
+# Preprocess RNA
+rna.layers["counts"] = rna.X.copy()
+sc.pp.highly_variable_genes(rna, n_top_genes=6000, flavor="seurat_v3")
+sc.pp.normalize_total(rna)
+sc.pp.log1p(rna)
+sc.pp.scale(rna, max_value=10)
+sc.tl.pca(rna, n_comps=100, use_highly_variable=True, svd_solver="auto")
+sc.pp.neighbors(rna, n_pcs=100, metric="cosine")
 # sc.tl.umap(rna)
-# sc.pl.umap(rna, color="cell_type")
+
+# %%
+rna.X = rna.layers["counts"]
+del rna.layers["counts"]
 
 
-# Preprocess scATAC-seq data
-atac.X, atac.X.data
-scglue.data.lsi(atac, n_components=100, n_iter=15)
-sc.pp.neighbors(atac, use_rep="X_lsi", metric="cosine")
+# Preprocess ATAC
+scglue.data.lsi(atac, n_components=100, use_highly_variable=False, n_iter=15)
+sc.pp.neighbors(atac, n_pcs=100, use_rep="X_lsi", metric="cosine")
 # sc.tl.umap(atac)
-# sc.pl.umap(atac, color="cell_type")
 
 
-# Obtain genomic coordinates
-rna.var.head() # annotations of genes
-scglue.data.get_gene_annotation(
-    rna, gtf="/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Annotations/gencode.vM25.chr_patch_hapl_scaff.annotation.gtf.gz",
-    gtf_by="gene_name" # recognition by gene names
-) # add more annotations from gtf
-rna.var.loc[:, ["chrom", "chromStart", "chromEnd"]].head() # extract selected columns
-atac.var_names[:5] # the first five rows
-split = atac.var_names.str.split(r"[:-]") # split into three columns
-atac.var["chrom"] = split.map(lambda x: x[0])
-atac.var["chromStart"] = split.map(lambda x: x[1])
-atac.var["chromEnd"] = split.map(lambda x: x[2])
-atac.var.head()
+# Generate prior overlap graph
+overlap_graph = scglue.genomics.window_graph(
+    genes.expand(2000, 0), peaks, 0,
+    attr_fn=lambda l, r, d: {
+        "weight": 1.0,
+        "type": "overlap"
+    }
+)
+overlap_graph = nx.DiGraph(overlap_graph)
+overlap_graph.number_of_edges()
 
 
-# Prior graph construction
-graph = scglue.genomics.rna_anchored_prior_graph(rna, atac)
-graph
-graph.number_of_nodes(), graph.number_of_edges()
+# Build distance graph
+dist_graph = scglue.genomics.window_graph(
+    promoters, peaks, 150000,
+    attr_fn=lambda l, r, d: {
+        "dist": abs(d),
+        "weight": scglue.genomics.dist_power_decay(abs(d)),
+        "type": "dist"
+    }
+)
+dist_graph = nx.DiGraph(dist_graph)
+dist_graph.number_of_edges()
 
 
-# Check whether all genes and CREs are incorporated in the prior graph
-all(graph.has_node(gene) for gene in rna.var_names), \
-all(graph.has_node(peak) for peak in atac.var_names)
+# %%
+rna.var["dcq_highly_variable"] = rna.var["highly_variable"]
+rna.var["dcq_highly_variable"].sum()
+
+# %%
+hvg_reachable = scglue.graph.reachable_vertices(dist_graph, rna.var.query("dcq_highly_variable").index)
+
+# %%
+atac.var["dcq_highly_variable"] = [item in hvg_reachable for item in atac.var_names]
+atac.var["dcq_highly_variable"].sum()
 
 
-# Edge attributes contain weights and signs
-# takes iterables (can be zero or more), aggregates them in a tuple, and return it
-for _, e in zip(range(5), graph.edges):
-    print(f"{e}: {graph.edges[e]}")
-
-
-# Each node has a self-loop
-all(graph.has_edge(gene, gene) for gene in rna.var_names), \
-all(graph.has_edge(peak, peak) for peak in atac.var_names)
-
-
-# Graph is symmetric
-all(graph.has_edge(j, i) for i, j, _ in graph.edges)
-atac.var.head()
-
-
+# Save the preprocessed data
 rna.write("/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/rna_preprocessed.h5ad", compression="gzip")
 atac.write("/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/atac_preprocessed.h5ad", compression="gzip")
-nx.write_graphml(graph, "/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/prior.graphml.gz")
+nx.write_graphml(overlap_graph, "/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/overlap.graphml.gz")
+nx.write_graphml(dist_graph, "/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/dist.graphml.gz")
