@@ -49,3 +49,60 @@ OMP: Info #277: omp_set_nested routine deprecated, please use omp_set_max_active
 Epoch 00045: reducing learning rate of group 0 to 2.0000e-04.
 Epoch 00045: reducing learning rate of group 0 to 2.0000e-04.
 [INFO] LRScheduler: Learning rate reduction: step 1
+[INFO] SCGLUETrainer: [Epoch 50] train={'g_nll': 0.408, 'g_kl': 0.004, 'g_elbo': 0.411, 'x_rna_nll': 0.16, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.166, 'x_atac_nll': 0.039, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.039, 'dsc_loss': 0.694, 'vae_loss': 0.222, 'gen_loss': 0.187}, val={'g_nll': 0.407, 'g_kl': 0.004, 'g_elbo': 0.411, 'x_rna_nll': 0.16, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.166, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.666, 'vae_loss': 0.223, 'gen_loss': 0.189}, 5.0s elapsed
+[INFO] SCGLUETrainer: [Epoch 60] train={'g_nll': 0.408, 'g_kl': 0.003, 'g_elbo': 0.411, 'x_rna_nll': 0.16, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.166, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.695, 'vae_loss': 0.222, 'gen_loss': 0.187}, val={'g_nll': 0.408, 'g_kl': 0.003, 'g_elbo': 0.411, 'x_rna_nll': 0.16, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.165, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.682, 'vae_loss': 0.222, 'gen_loss': 0.188}, 5.5s elapsed
+Epoch 00069: reducing learning rate of group 0 to 2.0000e-05.
+Epoch 00069: reducing learning rate of group 0 to 2.0000e-05.
+[INFO] LRScheduler: Learning rate reduction: step 2
+[INFO] SCGLUETrainer: [Epoch 70] train={'g_nll': 0.408, 'g_kl': 0.003, 'g_elbo': 0.411, 'x_rna_nll': 0.16, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.165, 'x_atac_nll': 0.039, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.695, 'vae_loss': 0.221, 'gen_loss': 0.187}, val={'g_nll': 0.408, 'g_kl': 0.003, 'g_elbo': 0.412, 'x_rna_nll': 0.159, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.164, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.67, 'vae_loss': 0.221, 'gen_loss': 0.187}, 5.5s elapsed
+Epoch 00079: reducing learning rate of group 0 to 2.0000e-06.
+Epoch 00079: reducing learning rate of group 0 to 2.0000e-06.
+[INFO] LRScheduler: Learning rate reduction: step 3
+[INFO] SCGLUETrainer: [Epoch 80] train={'g_nll': 0.408, 'g_kl': 0.003, 'g_elbo': 0.411, 'x_rna_nll': 0.16, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.165, 'x_atac_nll': 0.039, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.039, 'dsc_loss': 0.696, 'vae_loss': 0.221, 'gen_loss': 0.187}, val={'g_nll': 0.408, 'g_kl': 0.003, 'g_elbo': 0.411, 'x_rna_nll': 0.16, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.165, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.675, 'vae_loss': 0.222, 'gen_loss': 0.188}, 5.6s elapsed
+[INFO] SCGLUETrainer: [Epoch 90] train={'g_nll': 0.408, 'g_kl': 0.003, 'g_elbo': 0.411, 'x_rna_nll': 0.16, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.165, 'x_atac_nll': 0.039, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.039, 'dsc_loss': 0.697, 'vae_loss': 0.221, 'gen_loss': 0.186}, val={'g_nll': 0.407, 'g_kl': 0.003, 'g_elbo': 0.411, 'x_rna_nll': 0.162, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.167, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.667, 'vae_loss': 0.223, 'gen_loss': 0.19}, 5.5s elapsed
+Epoch 00094: reducing learning rate of group 0 to 2.0000e-07.
+Epoch 00094: reducing learning rate of group 0 to 2.0000e-07.
+[INFO] LRScheduler: Learning rate reduction: step 4
+[INFO] SCGLUETrainer: [Epoch 100] train={'g_nll': 0.408, 'g_kl': 0.003, 'g_elbo': 0.411, 'x_rna_nll': 0.16, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.166, 'x_atac_nll': 0.039, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.694, 'vae_loss': 0.222, 'gen_loss': 0.187}, val={'g_nll': 0.408, 'g_kl': 0.003, 'g_elbo': 0.411, 'x_rna_nll': 0.162, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.168, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.655, 'vae_loss': 0.224, 'gen_loss': 0.191}, 5.2s elapsed
+2022-06-11 14:49:26,941 ignite.handlers.early_stopping.EarlyStopping INFO: EarlyStopping: Stop training
+[INFO] EarlyStopping: Restoring checkpoint "97"...
+[INFO] get_metacells: Clustering metacells...
+[WARNING] get_metacells: `faiss` is not installed, using `sklearn` instead... This might be slow with a large number of cells. Consider installing `faiss` following the guide from https://github.com/facebookresearch/faiss/blob/main/INSTALL.md
+[INFO] get_metacells: Aggregating metacells...
+/users/PAS1475/liyang/.conda/envs/GLUE_env/lib/python3.9/site-packages/scglue/data.py:194: FutureWarning: X.dtype being converted to np.float32 from float64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
+  return AnnData(
+/users/PAS1475/liyang/.conda/envs/GLUE_env/lib/python3.9/site-packages/scglue/data.py:194: FutureWarning: X.dtype being converted to np.float32 from float64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
+  return AnnData(
+[INFO] metacell_corr: Computing correlation on 10 common metacells...
+[INFO] get_metacells: Clustering metacells...
+[WARNING] get_metacells: `faiss` is not installed, using `sklearn` instead... This might be slow with a large number of cells. Consider installing `faiss` following the guide from https://github.com/facebookresearch/faiss/blob/main/INSTALL.md
+[INFO] get_metacells: Aggregating metacells...
+/users/PAS1475/liyang/.conda/envs/GLUE_env/lib/python3.9/site-packages/scglue/data.py:194: FutureWarning: X.dtype being converted to np.float32 from float64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
+  return AnnData(
+/users/PAS1475/liyang/.conda/envs/GLUE_env/lib/python3.9/site-packages/scglue/data.py:194: FutureWarning: X.dtype being converted to np.float32 from float64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
+  return AnnData(
+[INFO] metacell_corr: Computing correlation on 20 common metacells...
+[INFO] get_metacells: Clustering metacells...
+[WARNING] get_metacells: `faiss` is not installed, using `sklearn` instead... This might be slow with a large number of cells. Consider installing `faiss` following the guide from https://github.com/facebookresearch/faiss/blob/main/INSTALL.md
+[INFO] get_metacells: Aggregating metacells...
+/users/PAS1475/liyang/.conda/envs/GLUE_env/lib/python3.9/site-packages/scglue/data.py:194: FutureWarning: X.dtype being converted to np.float32 from float64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
+  return AnnData(
+/users/PAS1475/liyang/.conda/envs/GLUE_env/lib/python3.9/site-packages/scglue/data.py:194: FutureWarning: X.dtype being converted to np.float32 from float64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
+  return AnnData(
+[INFO] metacell_corr: Computing correlation on 50 common metacells...
+[INFO] get_metacells: Clustering metacells...
+[WARNING] get_metacells: `faiss` is not installed, using `sklearn` instead... This might be slow with a large number of cells. Consider installing `faiss` following the guide from https://github.com/facebookresearch/faiss/blob/main/INSTALL.md
+[INFO] get_metacells: Aggregating metacells...
+/users/PAS1475/liyang/.conda/envs/GLUE_env/lib/python3.9/site-packages/scglue/data.py:194: FutureWarning: X.dtype being converted to np.float32 from float64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
+  return AnnData(
+/users/PAS1475/liyang/.conda/envs/GLUE_env/lib/python3.9/site-packages/scglue/data.py:194: FutureWarning: X.dtype being converted to np.float32 from float64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
+  return AnnData(
+[INFO] metacell_corr: Computing correlation on 100 common metacells...
+[INFO] get_metacells: Clustering metacells...
+[WARNING] get_metacells: `faiss` is not installed, using `sklearn` instead... This might be slow with a large number of cells. Consider installing `faiss` following the guide from https://github.com/facebookresearch/faiss/blob/main/INSTALL.md
+[INFO] get_metacells: Aggregating metacells...
+/users/PAS1475/liyang/.conda/envs/GLUE_env/lib/python3.9/site-packages/scglue/data.py:194: FutureWarning: X.dtype being converted to np.float32 from float64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
+  return AnnData(
+/users/PAS1475/liyang/.conda/envs/GLUE_env/lib/python3.9/site-packages/scglue/data.py:194: FutureWarning: X.dtype being converted to np.float32 from float64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
+  return AnnData(
+[INFO] metacell_corr: Computing correlation on 200 common metacells...
