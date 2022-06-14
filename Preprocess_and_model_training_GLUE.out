@@ -1,8 +1,9 @@
-Traceback (most recent call last):
-  File "/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Codes/1_GLUE_preprocess_example.py", line 81, in <module>
-    genes = scglue.genomics.Bed(rna.var.assign(name=rna.var_names))
-  File "/users/PAS1475/liyang/.conda/envs/GLUE_env/lib/python3.9/site-packages/scglue/utils.py", line 478, in __init__
-    df = self.rectify(df)
-  File "/users/PAS1475/liyang/.conda/envs/GLUE_env/lib/python3.9/site-packages/scglue/genomics.py", line 53, in rectify
-    raise ValueError(f"Required column {item} is missing!")
-ValueError: Required column chrom is missing!
+/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Codes/4_Infer_CRE_gene_links_example.py:68: FutureWarning: biadjacency_matrix will return a scipy.sparse array instead of a matrix in NetworkX 3.0
+  dist = biadjacency_matrix(dist_graph, genes.index, peaks.index, weight="dist", dtype=np.float32)
+  0%|          | 0/238319 [00:00<?, ?it/s]  4%|▍         | 9503/238319 [00:00<00:02, 95024.88it/s]  8%|▊         | 19292/238319 [00:00<00:02, 96707.14it/s] 12%|█▏        | 28963/238319 [00:00<00:02, 96511.60it/s] 16%|█▌        | 38716/238319 [00:00<00:02, 96910.18it/s] 20%|██        | 48603/238319 [00:00<00:01, 97615.35it/s] 24%|██▍       | 58365/238319 [00:00<00:01, 96947.52it/s] 29%|██▊       | 68061/238319 [00:00<00:01, 96358.84it/s] 33%|███▎      | 77698/238319 [00:00<00:01, 95941.07it/s] 37%|███▋      | 87293/238319 [00:00<00:01, 95802.37it/s] 41%|████      | 97099/238319 [00:01<00:01, 96493.92it/s] 45%|████▍     | 106807/238319 [00:01<00:01, 96669.60it/s] 49%|████▉     | 116676/238319 [00:01<00:01, 97281.54it/s] 53%|█████▎    | 126480/238319 [00:01<00:01, 97510.10it/s] 57%|█████▋    | 136232/238319 [00:01<00:01, 97426.89it/s] 61%|██████▏   | 145998/238319 [00:01<00:00, 97494.26it/s] 65%|██████▌   | 155748/238319 [00:01<00:00, 97172.57it/s] 69%|██████▉   | 165531/238319 [00:01<00:00, 97366.04it/s] 74%|███████▎  | 175397/238319 [00:01<00:00, 97751.35it/s] 78%|███████▊  | 185342/238319 [00:01<00:00, 98258.42it/s] 82%|████████▏ | 195236/238319 [00:02<00:00, 98459.34it/s] 86%|████████▌ | 205083/238319 [00:02<00:00, 98342.24it/s] 90%|█████████ | 214928/238319 [00:02<00:00, 98372.88it/s] 94%|█████████▍| 224766/238319 [00:02<00:00, 98234.48it/s] 98%|█████████▊| 234590/238319 [00:02<00:00, 98111.23it/s]100%|██████████| 238319/238319 [00:02<00:00, 97380.53it/s]
+/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Codes/4_Infer_CRE_gene_links_example.py:91: FutureWarning: biadjacency_matrix will return a scipy.sparse array instead of a matrix in NetworkX 3.0
+  glue = biadjacency_matrix(glue_graph, genes.index, peaks.index, weight="score", dtype=np.float32)
+/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Codes/4_Infer_CRE_gene_links_example.py:92: FutureWarning: biadjacency_matrix will return a scipy.sparse array instead of a matrix in NetworkX 3.0
+  qval = biadjacency_matrix(glue_graph, genes.index, peaks.index, weight="qval", dtype=np.float32)
+/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Codes/4_Infer_CRE_gene_links_example.py:96: FutureWarning: biadjacency_matrix will return a scipy.sparse array instead of a matrix in NetworkX 3.0
+  window = biadjacency_matrix(

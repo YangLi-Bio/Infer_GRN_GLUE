@@ -67,13 +67,13 @@ dist_graph = nx.read_graphml("/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/E
 
 dist = biadjacency_matrix(dist_graph, genes.index, peaks.index, weight="dist", dtype=np.float32)
 
-# %%
-corr = biadjacency_matrix(
-    utils.metacell_corr(
-        rna, atac, "X_pca", n_meta=200,
-        skeleton=dist_graph.subgraph([*genes.index, *peaks.index]), method="spr"
-    ), genes.index, peaks.index, weight="corr", dtype=np.float32
-)
+# # %%
+# corr = biadjacency_matrix(
+#     scglue.data.metacell_corr(
+#         *rna, *atac, "X_pca", n_meta=200,
+#         skeleton=dist_graph.subgraph([*genes.index, *peaks.index]), method="spr"
+#     ), genes.index, peaks.index, weight="corr", dtype=np.float32
+# )
 
 
 # Load feature embeddings
@@ -84,7 +84,7 @@ feature_embeddings = pd.read_csv("/fs/ess/PCON0022/liyang/STREAM/benchmarking/GL
 # %%
 glue_graph = scglue.genomics.regulatory_inference(
     feature_embeddings.index,
-    feature_embedding.to_numpy(),
+    feature_embeddings.to_numpy(),
     dist_graph.subgraph([*genes.index, *peaks.index]),
     alternative="greater", random_state=0
 )
@@ -97,13 +97,13 @@ window = biadjacency_matrix(
     dist_graph, genes.index, peaks.index, weight=None, dtype=np.float32
 ).tocoo()
 dist = window.multiply(dist.toarray())
-corr = window.multiply(corr.toarray())
+# corr = window.multiply(corr.toarray())
 glue = window.multiply(glue.toarray())
 qval = window.multiply(qval.toarray())
 
 
 
-for mat in (dist, corr, glue, qval):
+for mat in (dist, glue, qval):
     assert np.all(window.row == mat.row)
     assert np.all(window.col == mat.col)
 
@@ -113,11 +113,14 @@ gene_peak_conn = pd.DataFrame({
     "gene": genes.index[window.row],
     "peak": peaks.index[window.col],
     "dist": dist.data.astype(int),
-    "corr": corr.data,
+    # "corr": corr.data,
     "glue": glue.data,
     "qval": qval.data
 })
 gene_peak_conn.to_pickle("/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/gene_peak_conn.pkl.gz")
+gene_peak_df = pd.DataFrameFrame(gene_peak_conn)
+gene_peak_df.to_csv("/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/gene_peak_conn.csv", 
+                            index=False, header=True)
 
 
 # Filtering gene-peak connection
