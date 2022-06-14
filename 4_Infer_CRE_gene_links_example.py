@@ -118,29 +118,29 @@ gene_peak_conn = pd.DataFrame({
     "qval": qval.data
 })
 gene_peak_conn.to_pickle("/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/gene_peak_conn.pkl.gz")
-gene_peak_df = pd.DataFrameFrame(gene_peak_conn)
+gene_peak_df = pd.DataFrame(gene_peak_conn)
 gene_peak_df.to_csv("/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/gene_peak_conn.csv", 
                             index=False, header=True)
 
 
-# Filtering gene-peak connection
-# %%
-qval_cutoff = 0.05
-_ = sns.scatterplot(
-    x="glue", y="qval", data=gene_peak_conn.sample(n=2000),
-    edgecolor=None, s=5, alpha=0.1
-).axhline(y=qval_cutoff, c="darkred", ls="--")
-
-
-# %%
-gene_peak_conn_glue = gene_peak_conn.query(f"qval < {qval_cutoff}")
-gene_peak_conn_glue.shape[0]
-
-
-# %%
-frac_pos = gene_peak_conn_glue.shape[0] / gene_peak_conn.shape[0]
-frac_pos
-
-# %%
-glue_cutoff = gene_peak_conn.query(f"qval < {qval_cutoff}")["glue"].min()
-glue_cutoff
+# # Filtering gene-peak connection
+# # %%
+# qval_cutoff = 0.05
+# _ = sns.scatterplot(
+#     x="glue", y="qval", data=gene_peak_conn.sample(n=2000),
+#     edgecolor=None, s=5, alpha=0.1
+# ).axhline(y=qval_cutoff, c="darkred", ls="--")
+# 
+# 
+# # %%
+# gene_peak_conn_glue = gene_peak_conn.query(f"qval < {qval_cutoff}")
+# gene_peak_conn_glue.shape[0]
+# 
+# 
+# # %%
+# frac_pos = gene_peak_conn_glue.shape[0] / gene_peak_conn.shape[0]
+# frac_pos
+# 
+# # %%
+# glue_cutoff = gene_peak_conn.query(f"qval < {qval_cutoff}")["glue"].min()
+# glue_cutoff
