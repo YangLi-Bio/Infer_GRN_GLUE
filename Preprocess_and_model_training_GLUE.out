@@ -1,112 +1,8 @@
-OMP: Info #277: omp_set_nested routine deprecated, please use omp_set_max_active_levels instead.
-/users/PAS1475/liyang/.conda/envs/GLUE_env/lib/python3.9/site-packages/sklearn/utils/extmath.py:369: FutureWarning: If 'random_state' is not supplied, the current default is to use 0 as a fixed seed. This will change to  None in version 1.2 leading to non-deterministic results that better reflect nature of the randomized_svd solver. If you want to silence this warning, set 'random_state' to an integer seed or to None explicitly depending if you want your code to be deterministic or not.
-  warnings.warn(
-  0%|          | 0/28930 [00:00<?, ?it/s]  1%|          | 219/28930 [00:00<00:13, 2186.56it/s]  3%|▎         | 783/28930 [00:00<00:06, 4212.73it/s]  6%|▌         | 1630/28930 [00:00<00:04, 6141.10it/s]  9%|▊         | 2490/28930 [00:00<00:03, 7096.63it/s] 11%|█▏        | 3307/28930 [00:00<00:03, 7480.96it/s] 16%|█▌        | 4524/28930 [00:00<00:02, 9070.94it/s] 20%|█▉        | 5677/28930 [00:00<00:02, 9872.30it/s] 23%|██▎       | 6665/28930 [00:00<00:02, 9286.17it/s] 26%|██▋       | 7601/28930 [00:00<00:02, 9071.91it/s] 29%|██▉       | 8514/28930 [00:01<00:02, 8953.19it/s] 33%|███▎      | 9413/28930 [00:01<00:02, 8625.51it/s] 36%|███▌      | 10280/28930 [00:01<00:02, 8400.06it/s] 40%|███▉      | 11448/28930 [00:01<00:01, 9333.19it/s] 43%|████▎     | 12390/28930 [00:01<00:03, 5169.54it/s] 46%|████▌     | 13288/28930 [00:01<00:02, 5876.85it/s] 49%|████▉     | 14164/28930 [00:01<00:02, 6480.00it/s] 53%|█████▎    | 15335/28930 [00:02<00:01, 7685.58it/s] 58%|█████▊    | 16697/28930 [00:02<00:01, 9153.87it/s] 61%|██████▏   | 17767/28930 [00:02<00:01, 9552.26it/s] 65%|██████▌   | 18824/28930 [00:02<00:01, 9759.96it/s] 69%|██████▉   | 19893/28930 [00:02<00:00, 10016.77it/s] 73%|███████▎  | 20992/28930 [00:02<00:00, 10291.66it/s] 76%|███████▋  | 22060/28930 [00:02<00:00, 9956.09it/s]  81%|████████▏ | 23509/28930 [00:02<00:00, 11226.70it/s] 85%|████████▌ | 24660/28930 [00:02<00:00, 10267.53it/s] 89%|████████▉ | 25721/28930 [00:03<00:00, 9971.72it/s]  92%|█████████▏| 26742/28930 [00:03<00:00, 9539.04it/s] 98%|█████████▊| 28427/28930 [00:03<00:00, 11509.99it/s]100%|██████████| 28930/28930 [00:03<00:00, 8899.93it/s] 
-('Xkr4', 'chr1:3210899-3211332', 0): {'dist': 0, 'weight': 1.0, 'sign': 1, 'type': 'fwd'}
-('Xkr4', 'chr1:3216313-3216806', 0): {'dist': 0, 'weight': 1.0, 'sign': 1, 'type': 'fwd'}
-('Xkr4', 'chr1:3217279-3217678', 0): {'dist': 0, 'weight': 1.0, 'sign': 1, 'type': 'fwd'}
-('Xkr4', 'chr1:3228082-3228372', 0): {'dist': 0, 'weight': 1.0, 'sign': 1, 'type': 'fwd'}
-('Xkr4', 'chr1:3265226-3265683', 0): {'dist': 0, 'weight': 1.0, 'sign': 1, 'type': 'fwd'}
-[INFO] fit_SCGLUE: Pretraining SCGLUE model...
-[INFO] autodevice: Using GPU 0 as computation device.
-[INFO] SCGLUEModel: Setting `graph_batch_size` = 27025
-[INFO] SCGLUEModel: Setting `max_epochs` = 186
-[INFO] SCGLUEModel: Setting `patience` = 16
-[INFO] SCGLUEModel: Setting `reduce_lr_patience` = 8
-[INFO] SCGLUETrainer: Using training directory: "glue/pretrain"
-/users/PAS1475/liyang/.conda/envs/GLUE_env/lib/python3.9/site-packages/torch/distributions/negative_binomial.py:97: UserWarning: Specified kernel cache directory could not be created! This disables kernel caching. Specified directory is /users/PAS1475/liyang/.cache/torch/kernels. This warning will appear only once per process. (Triggered internally at  /opt/conda/conda-bld/pytorch_1646756402876/work/aten/src/ATen/native/cuda/jit_utils.cpp:860.)
-  log_normalization = (-torch.lgamma(self.total_count + value) + torch.lgamma(1. + value) +
-[INFO] SCGLUETrainer: [Epoch 10] train={'g_nll': 0.449, 'g_kl': 0.005, 'g_elbo': 0.454, 'x_rna_nll': 0.165, 'x_rna_kl': 0.006, 'x_rna_elbo': 0.171, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.041, 'dsc_loss': 0.692, 'vae_loss': 0.23, 'gen_loss': 0.195}, val={'g_nll': 0.447, 'g_kl': 0.004, 'g_elbo': 0.451, 'x_rna_nll': 0.165, 'x_rna_kl': 0.006, 'x_rna_elbo': 0.171, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.695, 'vae_loss': 0.23, 'gen_loss': 0.195}, 5.5s elapsed
-[INFO] SCGLUETrainer: [Epoch 20] train={'g_nll': 0.431, 'g_kl': 0.004, 'g_elbo': 0.435, 'x_rna_nll': 0.163, 'x_rna_kl': 0.006, 'x_rna_elbo': 0.17, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.693, 'vae_loss': 0.227, 'gen_loss': 0.192}, val={'g_nll': 0.432, 'g_kl': 0.004, 'g_elbo': 0.435, 'x_rna_nll': 0.163, 'x_rna_kl': 0.006, 'x_rna_elbo': 0.169, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.694, 'vae_loss': 0.226, 'gen_loss': 0.191}, 4.5s elapsed
-[INFO] SCGLUETrainer: [Epoch 30] train={'g_nll': 0.424, 'g_kl': 0.004, 'g_elbo': 0.427, 'x_rna_nll': 0.162, 'x_rna_kl': 0.006, 'x_rna_elbo': 0.168, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.693, 'vae_loss': 0.225, 'gen_loss': 0.19}, val={'g_nll': 0.423, 'g_kl': 0.004, 'g_elbo': 0.427, 'x_rna_nll': 0.165, 'x_rna_kl': 0.006, 'x_rna_elbo': 0.171, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.693, 'vae_loss': 0.228, 'gen_loss': 0.193}, 4.7s elapsed
-Epoch 00034: reducing learning rate of group 0 to 2.0000e-04.
-Epoch 00034: reducing learning rate of group 0 to 2.0000e-04.
-[INFO] LRScheduler: Learning rate reduction: step 1
-[INFO] SCGLUETrainer: [Epoch 40] train={'g_nll': 0.42, 'g_kl': 0.004, 'g_elbo': 0.424, 'x_rna_nll': 0.161, 'x_rna_kl': 0.006, 'x_rna_elbo': 0.167, 'x_atac_nll': 0.039, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.693, 'vae_loss': 0.224, 'gen_loss': 0.189}, val={'g_nll': 0.419, 'g_kl': 0.004, 'g_elbo': 0.422, 'x_rna_nll': 0.163, 'x_rna_kl': 0.006, 'x_rna_elbo': 0.169, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.693, 'vae_loss': 0.226, 'gen_loss': 0.191}, 5.4s elapsed
-Epoch 00045: reducing learning rate of group 0 to 2.0000e-05.
-Epoch 00045: reducing learning rate of group 0 to 2.0000e-05.
-[INFO] LRScheduler: Learning rate reduction: step 2
-[INFO] SCGLUETrainer: [Epoch 50] train={'g_nll': 0.42, 'g_kl': 0.004, 'g_elbo': 0.424, 'x_rna_nll': 0.161, 'x_rna_kl': 0.006, 'x_rna_elbo': 0.167, 'x_atac_nll': 0.039, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.693, 'vae_loss': 0.223, 'gen_loss': 0.189}, val={'g_nll': 0.42, 'g_kl': 0.004, 'g_elbo': 0.423, 'x_rna_nll': 0.161, 'x_rna_kl': 0.006, 'x_rna_elbo': 0.167, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.693, 'vae_loss': 0.224, 'gen_loss': 0.189}, 5.6s elapsed
-2022-06-13 00:53:45,998 ignite.handlers.early_stopping.EarlyStopping INFO: EarlyStopping: Stop training
-[INFO] EarlyStopping: Restoring checkpoint "52"...
-[INFO] fit_SCGLUE: Estimating balancing weight...
-[INFO] estimate_balancing_weight: Clustering cells...
-OMP: Info #277: omp_set_nested routine deprecated, please use omp_set_max_active_levels instead.
-[INFO] estimate_balancing_weight: Matching clusters...
-[INFO] estimate_balancing_weight: Matching array shape = (17, 18)...
-[INFO] estimate_balancing_weight: Estimating balancing weight...
-[INFO] fit_SCGLUE: Fine-tuning SCGLUE model...
-[INFO] SCGLUEModel: Setting `graph_batch_size` = 27025
-[INFO] SCGLUEModel: Setting `align_burnin` = 31
-[INFO] SCGLUEModel: Setting `max_epochs` = 186
-[INFO] SCGLUEModel: Setting `patience` = 16
-[INFO] SCGLUEModel: Setting `reduce_lr_patience` = 8
-[INFO] SCGLUETrainer: Using training directory: "glue/fine-tune"
-[INFO] SCGLUETrainer: [Epoch 10] train={'g_nll': 0.418, 'g_kl': 0.004, 'g_elbo': 0.421, 'x_rna_nll': 0.161, 'x_rna_kl': 0.006, 'x_rna_elbo': 0.167, 'x_atac_nll': 0.039, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.696, 'vae_loss': 0.223, 'gen_loss': 0.188}, val={'g_nll': 0.417, 'g_kl': 0.004, 'g_elbo': 0.421, 'x_rna_nll': 0.162, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.167, 'x_atac_nll': 0.039, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.677, 'vae_loss': 0.224, 'gen_loss': 0.19}, 5.6s elapsed
-[INFO] SCGLUETrainer: [Epoch 20] train={'g_nll': 0.415, 'g_kl': 0.004, 'g_elbo': 0.418, 'x_rna_nll': 0.162, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.167, 'x_atac_nll': 0.039, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.695, 'vae_loss': 0.224, 'gen_loss': 0.189}, val={'g_nll': 0.415, 'g_kl': 0.003, 'g_elbo': 0.418, 'x_rna_nll': 0.162, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.167, 'x_atac_nll': 0.039, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.679, 'vae_loss': 0.224, 'gen_loss': 0.19}, 5.6s elapsed
-[INFO] SCGLUETrainer: [Epoch 30] train={'g_nll': 0.412, 'g_kl': 0.003, 'g_elbo': 0.416, 'x_rna_nll': 0.161, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.166, 'x_atac_nll': 0.039, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.691, 'vae_loss': 0.223, 'gen_loss': 0.188}, val={'g_nll': 0.412, 'g_kl': 0.003, 'g_elbo': 0.415, 'x_rna_nll': 0.164, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.17, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.679, 'vae_loss': 0.226, 'gen_loss': 0.192}, 5.6s elapsed
-[INFO] SCGLUETrainer: [Epoch 40] train={'g_nll': 0.411, 'g_kl': 0.003, 'g_elbo': 0.414, 'x_rna_nll': 0.161, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.167, 'x_atac_nll': 0.039, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.696, 'vae_loss': 0.223, 'gen_loss': 0.188}, val={'g_nll': 0.409, 'g_kl': 0.003, 'g_elbo': 0.413, 'x_rna_nll': 0.163, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.168, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.68, 'vae_loss': 0.225, 'gen_loss': 0.191}, 5.4s elapsed
-Epoch 00045: reducing learning rate of group 0 to 2.0000e-04.
-Epoch 00045: reducing learning rate of group 0 to 2.0000e-04.
-[INFO] LRScheduler: Learning rate reduction: step 1
-[INFO] SCGLUETrainer: [Epoch 50] train={'g_nll': 0.409, 'g_kl': 0.003, 'g_elbo': 0.413, 'x_rna_nll': 0.16, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.166, 'x_atac_nll': 0.039, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.039, 'dsc_loss': 0.693, 'vae_loss': 0.222, 'gen_loss': 0.187}, val={'g_nll': 0.408, 'g_kl': 0.003, 'g_elbo': 0.412, 'x_rna_nll': 0.16, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.166, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.675, 'vae_loss': 0.223, 'gen_loss': 0.189}, 5.5s elapsed
-[INFO] SCGLUETrainer: [Epoch 60] train={'g_nll': 0.408, 'g_kl': 0.003, 'g_elbo': 0.412, 'x_rna_nll': 0.16, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.166, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.694, 'vae_loss': 0.222, 'gen_loss': 0.187}, val={'g_nll': 0.408, 'g_kl': 0.003, 'g_elbo': 0.412, 'x_rna_nll': 0.16, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.165, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.685, 'vae_loss': 0.222, 'gen_loss': 0.187}, 5.7s elapsed
-Epoch 00069: reducing learning rate of group 0 to 2.0000e-05.
-Epoch 00069: reducing learning rate of group 0 to 2.0000e-05.
-[INFO] LRScheduler: Learning rate reduction: step 2
-[INFO] SCGLUETrainer: [Epoch 70] train={'g_nll': 0.408, 'g_kl': 0.003, 'g_elbo': 0.412, 'x_rna_nll': 0.16, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.165, 'x_atac_nll': 0.039, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.695, 'vae_loss': 0.221, 'gen_loss': 0.187}, val={'g_nll': 0.408, 'g_kl': 0.003, 'g_elbo': 0.411, 'x_rna_nll': 0.159, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.164, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.677, 'vae_loss': 0.221, 'gen_loss': 0.187}, 4.7s elapsed
-Epoch 00079: reducing learning rate of group 0 to 2.0000e-06.
-Epoch 00079: reducing learning rate of group 0 to 2.0000e-06.
-[INFO] LRScheduler: Learning rate reduction: step 3
-[INFO] SCGLUETrainer: [Epoch 80] train={'g_nll': 0.408, 'g_kl': 0.003, 'g_elbo': 0.412, 'x_rna_nll': 0.16, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.165, 'x_atac_nll': 0.039, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.039, 'dsc_loss': 0.693, 'vae_loss': 0.221, 'gen_loss': 0.187}, val={'g_nll': 0.408, 'g_kl': 0.003, 'g_elbo': 0.411, 'x_rna_nll': 0.16, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.165, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.678, 'vae_loss': 0.222, 'gen_loss': 0.188}, 5.5s elapsed
-[INFO] SCGLUETrainer: [Epoch 90] train={'g_nll': 0.408, 'g_kl': 0.003, 'g_elbo': 0.412, 'x_rna_nll': 0.16, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.165, 'x_atac_nll': 0.039, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.039, 'dsc_loss': 0.694, 'vae_loss': 0.221, 'gen_loss': 0.187}, val={'g_nll': 0.408, 'g_kl': 0.003, 'g_elbo': 0.411, 'x_rna_nll': 0.162, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.167, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.677, 'vae_loss': 0.224, 'gen_loss': 0.19}, 5.5s elapsed
-Epoch 00094: reducing learning rate of group 0 to 2.0000e-07.
-Epoch 00094: reducing learning rate of group 0 to 2.0000e-07.
-[INFO] LRScheduler: Learning rate reduction: step 4
-[INFO] SCGLUETrainer: [Epoch 100] train={'g_nll': 0.408, 'g_kl': 0.003, 'g_elbo': 0.412, 'x_rna_nll': 0.161, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.166, 'x_atac_nll': 0.039, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.693, 'vae_loss': 0.222, 'gen_loss': 0.187}, val={'g_nll': 0.408, 'g_kl': 0.003, 'g_elbo': 0.412, 'x_rna_nll': 0.162, 'x_rna_kl': 0.005, 'x_rna_elbo': 0.168, 'x_atac_nll': 0.04, 'x_atac_kl': 0.0, 'x_atac_elbo': 0.04, 'dsc_loss': 0.67, 'vae_loss': 0.224, 'gen_loss': 0.191}, 5.2s elapsed
-2022-06-13 01:04:04,950 ignite.handlers.early_stopping.EarlyStopping INFO: EarlyStopping: Stop training
-[INFO] EarlyStopping: Restoring checkpoint "97"...
-[INFO] get_metacells: Clustering metacells...
-[WARNING] get_metacells: `faiss` is not installed, using `sklearn` instead... This might be slow with a large number of cells. Consider installing `faiss` following the guide from https://github.com/facebookresearch/faiss/blob/main/INSTALL.md
-[INFO] get_metacells: Aggregating metacells...
-/users/PAS1475/liyang/.conda/envs/GLUE_env/lib/python3.9/site-packages/scglue/data.py:194: FutureWarning: X.dtype being converted to np.float32 from float64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
-  return AnnData(
-/users/PAS1475/liyang/.conda/envs/GLUE_env/lib/python3.9/site-packages/scglue/data.py:194: FutureWarning: X.dtype being converted to np.float32 from float64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
-  return AnnData(
-[INFO] metacell_corr: Computing correlation on 10 common metacells...
-[INFO] get_metacells: Clustering metacells...
-[WARNING] get_metacells: `faiss` is not installed, using `sklearn` instead... This might be slow with a large number of cells. Consider installing `faiss` following the guide from https://github.com/facebookresearch/faiss/blob/main/INSTALL.md
-[INFO] get_metacells: Aggregating metacells...
-/users/PAS1475/liyang/.conda/envs/GLUE_env/lib/python3.9/site-packages/scglue/data.py:194: FutureWarning: X.dtype being converted to np.float32 from float64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
-  return AnnData(
-/users/PAS1475/liyang/.conda/envs/GLUE_env/lib/python3.9/site-packages/scglue/data.py:194: FutureWarning: X.dtype being converted to np.float32 from float64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
-  return AnnData(
-[INFO] metacell_corr: Computing correlation on 20 common metacells...
-[INFO] get_metacells: Clustering metacells...
-[WARNING] get_metacells: `faiss` is not installed, using `sklearn` instead... This might be slow with a large number of cells. Consider installing `faiss` following the guide from https://github.com/facebookresearch/faiss/blob/main/INSTALL.md
-[INFO] get_metacells: Aggregating metacells...
-/users/PAS1475/liyang/.conda/envs/GLUE_env/lib/python3.9/site-packages/scglue/data.py:194: FutureWarning: X.dtype being converted to np.float32 from float64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
-  return AnnData(
-/users/PAS1475/liyang/.conda/envs/GLUE_env/lib/python3.9/site-packages/scglue/data.py:194: FutureWarning: X.dtype being converted to np.float32 from float64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
-  return AnnData(
-[INFO] metacell_corr: Computing correlation on 50 common metacells...
-[INFO] get_metacells: Clustering metacells...
-[WARNING] get_metacells: `faiss` is not installed, using `sklearn` instead... This might be slow with a large number of cells. Consider installing `faiss` following the guide from https://github.com/facebookresearch/faiss/blob/main/INSTALL.md
-[INFO] get_metacells: Aggregating metacells...
-/users/PAS1475/liyang/.conda/envs/GLUE_env/lib/python3.9/site-packages/scglue/data.py:194: FutureWarning: X.dtype being converted to np.float32 from float64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
-  return AnnData(
-/users/PAS1475/liyang/.conda/envs/GLUE_env/lib/python3.9/site-packages/scglue/data.py:194: FutureWarning: X.dtype being converted to np.float32 from float64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
-  return AnnData(
-[INFO] metacell_corr: Computing correlation on 100 common metacells...
-[INFO] get_metacells: Clustering metacells...
-[WARNING] get_metacells: `faiss` is not installed, using `sklearn` instead... This might be slow with a large number of cells. Consider installing `faiss` following the guide from https://github.com/facebookresearch/faiss/blob/main/INSTALL.md
-[INFO] get_metacells: Aggregating metacells...
-/users/PAS1475/liyang/.conda/envs/GLUE_env/lib/python3.9/site-packages/scglue/data.py:194: FutureWarning: X.dtype being converted to np.float32 from float64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
-  return AnnData(
-/users/PAS1475/liyang/.conda/envs/GLUE_env/lib/python3.9/site-packages/scglue/data.py:194: FutureWarning: X.dtype being converted to np.float32 from float64. In the next version of anndata (0.9) conversion will not be automatic. Pass dtype explicitly to avoid this warning. Pass `AnnData(X, dtype=X.dtype, ...)` to get the future behavour.
-  return AnnData(
-[INFO] metacell_corr: Computing correlation on 200 common metacells...
 Traceback (most recent call last):
-  File "/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Codes/2_Model_training_example.py", line 93, in <module>
-    corr = biadjacency_matrix(
-NameError: name 'biadjacency_matrix' is not defined
+  File "/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Codes/1_GLUE_preprocess_example.py", line 81, in <module>
+    genes = scglue.genomics.Bed(rna.var.assign(name=rna.var_names))
+  File "/users/PAS1475/liyang/.conda/envs/GLUE_env/lib/python3.9/site-packages/scglue/utils.py", line 478, in __init__
+    df = self.rectify(df)
+  File "/users/PAS1475/liyang/.conda/envs/GLUE_env/lib/python3.9/site-packages/scglue/genomics.py", line 53, in rectify
+    raise ValueError(f"Required column {item} is missing!")
+ValueError: Required column chrom is missing!

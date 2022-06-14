@@ -19,4 +19,5 @@ module load python/3.7-2019.10
 source activate GLUE_env
 python 1_GLUE_preprocess_example.py
 python 2_Model_training_example.py
+python 4_Infer_CRE_gene_links.py
 conda deactivate

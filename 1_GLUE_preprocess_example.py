@@ -63,6 +63,14 @@ atac.X, atac.obs, atac.var
 sc.pp.filter_genes(rna, min_counts=1)
 rna.obs_names += "-RNA"
 
+
+scglue.data.get_gene_annotation(
+    rna, gtf="/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Annotations/gencode.vM25.chr_patch_hapl_scaff.annotation.gtf.gz",
+    gtf_by="gene_name"
+)
+rna.var.loc[:, ["chrom", "chromStart", "chromEnd"]].head()
+
+
 # rna
 # 
 # # %%
@@ -75,6 +83,14 @@ sc.pp.filter_genes(atac, min_counts=1)
 atac.obs_names += "-ATAC"
 
 # atac
+
+
+atac.var_names[:5]
+split = atac.var_names.str.split(r"[:-]")
+atac.var["chrom"] = split.map(lambda x: x[0])
+atac.var["chromStart"] = split.map(lambda x: x[1])
+atac.var["chromEnd"] = split.map(lambda x: x[2])
+atac.var.head()
 
 
 # Genes, CREs, promoters, and TSSs
@@ -131,19 +147,98 @@ dist_graph.number_of_edges()
 
 
 # %%
+rna.var["o_highly_variable"] = rna.var["highly_variable"]
+rna.var["o_highly_variable"].sum()
+
+
+# %%
+# rna.var["d_highly_variable"] = functools.reduce(np.logical_and, [
+#     rna.var["highly_variable"],
+#     rna.var["in_cicero"]
+# ])
+rna.var["d_highly_variable"] = rna.var["highly_variable"]
+rna.var["d_highly_variable"].sum()
+
+
+# %%
 rna.var["dcq_highly_variable"] = rna.var["highly_variable"]
 rna.var["dcq_highly_variable"].sum()
 
 # %%
-hvg_reachable = scglue.graph.reachable_vertices(dist_graph, rna.var.query("dcq_highly_variable").index)
+o_prior = overlap_graph.copy()
+
+# %%
+hvg_reachable = scglue.graph.reachable_vertices(o_prior, rna.var.query("o_highly_variable").index)
+
+
+# %%
+atac.var["o_highly_variable"] = [item in hvg_reachable for item in atac.var_names]
+atac.var["o_highly_variable"].sum()
+
+
+# %%
+o_prior = scglue.graph.compose_multigraph(o_prior, o_prior.reverse())
+for item in itertools.chain(atac.var_names, rna.var_names):
+    o_prior.add_edge(item, item, weight=1.0, type="self-loop")
+nx.set_edge_attributes(o_prior, 1, "sign")
+
+# %%
+o_prior = o_prior.subgraph(hvg_reachable)
+
+
+# %%
+d_prior = dist_graph.copy()
+
+
+# %%
+hvg_reachable = scglue.graph.reachable_vertices(d_prior, rna.var.query("d_highly_variable").index)
+
+# %%
+atac.var["d_highly_variable"] = [item in hvg_reachable for item in atac.var_names]
+atac.var["d_highly_variable"].sum()
+
+# %%
+d_prior = scglue.graph.compose_multigraph(d_prior, d_prior.reverse())
+for item in itertools.chain(atac.var_names, rna.var_names):
+    d_prior.add_edge(item, item, weight=1.0, type="self-loop")
+nx.set_edge_attributes(d_prior, 1, "sign")
+
+# %%
+d_prior = d_prior.subgraph(hvg_reachable)
+
+
+# %%
+# dcq_prior = scglue.graph.compose_multigraph(dist_graph, pchic_graph, eqtl_graph)
+dcq_prior = dist_graph
+
+# %%
+hvg_reachable = scglue.graph.reachable_vertices(dcq_prior, rna.var.query("dcq_highly_variable").index)
 
 # %%
 atac.var["dcq_highly_variable"] = [item in hvg_reachable for item in atac.var_names]
 atac.var["dcq_highly_variable"].sum()
 
+# %%
+dcq_prior = scglue.graph.compose_multigraph(dcq_prior, dcq_prior.reverse())
+for item in itertools.chain(atac.var_names, rna.var_names):
+    dcq_prior.add_edge(item, item, weight=1.0, type="self-loop")
+nx.set_edge_attributes(dcq_prior, 1, "sign")
 
-# Save the preprocessed data
+# %%
+dcq_prior = dcq_prior.subgraph(hvg_reachable)
+
+
+# %%
 rna.write("/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/rna_preprocessed.h5ad", compression="gzip")
 atac.write("/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/atac_preprocessed.h5ad", compression="gzip")
+
+
+# %%
 nx.write_graphml(overlap_graph, "/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/overlap.graphml.gz")
 nx.write_graphml(dist_graph, "/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/dist.graphml.gz")
+
+
+# %%
+nx.write_graphml(o_prior, "/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/o_prior.graphml.gz")
+nx.write_graphml(d_prior, "/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/d_prior.graphml.gz")
+nx.write_graphml(dcq_prior, "/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/dcq_prior.graphml.gz")

@@ -33,9 +33,9 @@ scglue.plot.set_publication_params()
 rcParams["figure.figsize"] = (4, 4)
 
 
-# %%
-PRIOR = os.environ.get("PRIOR", "d")
-SEED = int(os.environ.get("SEED", "0"))
+# # %%
+# PRIOR = os.environ.get("PRIOR", "d")
+# SEED = int(os.environ.get("SEED", "0"))
 
 
 # Load data
@@ -45,10 +45,36 @@ atac = anndata.read_h5ad("/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Examp
 atac.X, atac.obs, atac.var
 
 
+# # %%
+# PRIOR = os.environ.get("PRIOR", "d")
+# SEED = int(os.environ.get("SEED", "0"))
+
+
 # %%
+# prior = nx.read_graphml(
+#     f"s08_corrupt/{PRIOR}_prior.graphml.gz" if "corrupted" in PRIOR else
+#     f"s01_preprocessing/{PRIOR}_prior.graphml.gz"
+# )
+prior = nx.read_graphml("/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/o_prior.graphml.gz")
+
+
+# %%
+# clean_prior = re.sub(r"^.*corrupted_", "", PRIOR)
+
+
+# %%
+rna.var["highly_variable"] = rna.var["o_highly_variable"]
+atac.var["highly_variable"] = atac.var["o_highly_variable"]
+rna.var["highly_variable"].sum(), atac.var["highly_variable"].sum()
+
+
+# %%
+SEED = int(os.environ.get("SEED", "0"))
 scglue.models.configure_dataset(rna, "NB", use_highly_variable=True, use_rep="X_pca")
 scglue.models.configure_dataset(atac, "NB", use_highly_variable=True, use_rep="X_lsi")
 # %% tags=[]
+
+
 glue = scglue.models.SCGLUEModel(
     {"rna": rna, "atac": atac}, sorted(prior.nodes),
     random_seed=SEED
