@@ -78,10 +78,13 @@ rna_array = rna_array[:, 1:]
 rna = anndata.AnnData(np.transpose(rna_array))
 rna.obs_names = rna_df.columns[1:]
 rna.var_names = rna_df.iloc[:, 0]
-# rna.obs["cells"] = rna_df.columns[1:]
+rna.obs_names.name = 'cells'
+rna.var_names.name = 'genes'
+# rna.var['genes'] = rna.var_names
+# rna.obs['cells'] = rna.obs_names
 rna.obs["domain"] = np.repeat("scRNA-seq", len(rna.obs_names))
-print('Finished loading the RNA expression matrix containing ' + len(rna.obs) + 
-' cells and ' + len(rna.var) + ' genes.\n')
+print('Finished loading the RNA expression matrix containing ' + str(len(rna.obs)) + 
+' cells and ' + str(len(rna.var)) + ' genes.\n')
 
 
 # Load csv file for ATAC
@@ -90,11 +93,15 @@ atac_array = atac_df.to_numpy()
 atac_array = atac_array[:, 1:]
 atac = anndata.AnnData(np.transpose(atac_array))
 atac.obs_names = atac_df.columns[1:]
+atac.obs_names.name = 'cells'
 atac.var_names = atac_df.iloc[:, 0]
+atac.var_names.name = 'peaks'
+# atac.obs['cells'] = atac.obs_names
+# atac.var['peaks'] = atac.var_names
 # atac.obs["cells"] = atac_df.columns[1:]
 atac.obs["domain"] = np.repeat("scATAC-seq", len(atac.obs_names))
-print('Finished loading the ATAC accessibility matrix containing ' + len(atac.obs) + 
-' cells and ' + len(atac.var) + ' genes.\n')
+print('Finished loading the ATAC accessibility matrix containing ' + str(len(atac.obs)) + 
+' cells and ' + str(len(atac.var)) + ' genes.\n')
 
 
 # # Set cell types and chromosomes
@@ -132,7 +139,7 @@ rna.var.loc[:, ["chrom", "chromStart", "chromEnd"]].head()
 #     [item in used_chroms for item in atac.var["chrom"]]
 # ]
 
-sc.pp.filter_genes(atac, min_counts=1)
+sc.pp.filter_genes(atac, min_counts = 1)
 atac.obs_names += "-ATAC"
 
 # atac
@@ -147,23 +154,23 @@ atac.var.head()
 
 
 # Genes, CREs, promoters, and TSSs
-genes = scglue.genomics.Bed(rna.var.assign(name=rna.var_names))
-peaks = scglue.genomics.Bed(atac.var.assign(name=atac.var_names))
+genes = scglue.genomics.Bed(rna.var.assign(name = rna.var_names))
+peaks = scglue.genomics.Bed(atac.var.assign(name = atac.var_names))
 tss = genes.strand_specific_start_site()
 promoters = tss.expand(2000, 0) # promoter lengths: 2000 (default), 1000, and 3000
 
 
 # Preprocess RNA
 rna.layers["counts"] = rna.X.copy()
-sc.pp.highly_variable_genes(rna, n_top_genes=6000, flavor="seurat_v3")
+sc.pp.highly_variable_genes(rna, n_top_genes = 6000, flavor="seurat_v3")
 # flavor: seurat_v3 (default), seurat, and cell_ranger
 # n_top_genes: 6000 (default), 2000, and 3000
 
 sc.pp.normalize_total(rna)
 sc.pp.log1p(rna)
-sc.pp.scale(rna, max_value=10)
-sc.tl.pca(rna, n_comps=100, use_highly_variable=True, svd_solver="auto") # n_comps: 100 (default), 50, and 200
-sc.pp.neighbors(rna, n_pcs=100, metric="cosine") # n_pcs: 100 (default), 50, and 200
+sc.pp.scale(rna, max_value = 10)
+sc.tl.pca(rna, n_comps = 100, use_highly_variable = True, svd_solver = "auto") # n_comps: 100 (default), 50, and 200
+sc.pp.neighbors(rna, n_pcs = 100, metric  ="cosine") # n_pcs: 100 (default), 50, and 200
 # sc.tl.umap(rna)
 
 # %%
@@ -172,8 +179,8 @@ del rna.layers["counts"]
 
 
 # Preprocess ATAC
-scglue.data.lsi(atac, n_components=100, use_highly_variable=False, n_iter=15)
-sc.pp.neighbors(atac, n_pcs=100, use_rep="X_lsi", metric="cosine")
+scglue.data.lsi(atac, n_components = 100, use_highly_variable = False, n_iter = 15)
+sc.pp.neighbors(atac, n_pcs = 100, use_rep = "X_lsi", metric = "cosine")
 # sc.tl.umap(atac)
 
 
