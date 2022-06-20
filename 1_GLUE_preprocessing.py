@@ -20,6 +20,7 @@ import itertools #  implements a number of iterator building blocks inspired by 
 # from APL, Haskell, and SML
 
 import os # The design of all built-in operating system dependent modules
+import sys # get arguments from command lines
 
 import anndata
 import networkx as nx
@@ -37,15 +38,41 @@ scglue.plot.set_publication_params()
 rcParams["figure.figsize"] = (4, 4)
 
 
-# Load data
-rna = anndata.read_h5ad("/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/Chen-2019-RNA.h5ad")
-rna.X, rna.obs, rna.var
-atac = anndata.read_h5ad("/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/Chen-2019-ATAC.h5ad")
-atac.X, atac.obs, atac.var
+# # Load the input directories of RNA and ATAC
+rna_dir = sys.argv[1] # csv file name of the RNA
+atac_dir = sys.argv[2] # csv file name of the ATAC
+org = sys.argv[3] # the organism version, e.g., org = 'hg39'
+out_dir = sys.argv[4] # the output directory, e.g., out_dir = './'
+
+if not os.path.exists(out_dir):
+    print('Creating the directory ' + out_dir + ' ...\n')
+    os.makedirs(out_dir)
+
+annotation_gtf = "/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Annotations/" 
+# directory to save the annotation GTF files
+
+
+# Determine the annotateion GTF file
+if org == 'hg38':
+    annotation_gtf = annotation_gtf + 'gencode.v40.annotation.gtf.gz'
+elif org == 'hg19':
+    annotation_gtf = annotation_gtf + 'gencode.v19.annotation.gtf.gz'
+elif org == 'mm10':
+    annotation_gtf = annotation_gtf + 'gencode.vM10.annotation.gtf.gz'
+elif org == 'mm9':
+    annotation_gtf = annotation_gtf + 'gencode.vM9.annotation.gtf.gz'
+print('Finished loading the GTF file to annotate gene locations: ' + annotation_gtf + 
+'.\n')
+
+
+# rna = anndata.read_h5ad(rna_dir)
+# rna.X, rna.obs, rna.var
+# atac = anndata.read_h5ad(atac_dir)
+# atac.X, atac.obs, atac.var
 
 
 # Load csv file for RNA
-rna_df = pd.read_csv("/fs/ess/scratch/PCON0022/liyang/stream/csv_files/scCAT_seq_PDX_RNA.csv")
+rna_df = pd.read_csv(rna_dir)
 rna_array = rna_df.to_numpy()
 rna_array = rna_array[:, 1:]
 rna = anndata.AnnData(np.transpose(rna_array))
@@ -53,10 +80,12 @@ rna.obs_names = rna_df.columns[1:]
 rna.var_names = rna_df.iloc[:, 0]
 # rna.obs["cells"] = rna_df.columns[1:]
 rna.obs["domain"] = np.repeat("scRNA-seq", len(rna.obs_names))
+print('Finished loading the RNA expression matrix containing ' + len(rna.obs) + 
+' cells and ' + len(rna.var) + ' genes.\n')
 
 
 # Load csv file for ATAC
-atac_df = pd.read_csv("/fs/ess/scratch/PCON0022/liyang/stream/csv_files/scCAT_seq_PDX_ATAC.csv")
+atac_df = pd.read_csv(atac_dir)
 atac_array = atac_df.to_numpy()
 atac_array = atac_array[:, 1:]
 atac = anndata.AnnData(np.transpose(atac_array))
@@ -64,6 +93,8 @@ atac.obs_names = atac_df.columns[1:]
 atac.var_names = atac_df.iloc[:, 0]
 # atac.obs["cells"] = atac_df.columns[1:]
 atac.obs["domain"] = np.repeat("scATAC-seq", len(atac.obs_names))
+print('Finished loading the ATAC accessibility matrix containing ' + len(atac.obs) + 
+' cells and ' + len(atac.var) + ' genes.\n')
 
 
 # # Set cell types and chromosomes
@@ -82,13 +113,13 @@ atac.obs["domain"] = np.repeat("scATAC-seq", len(atac.obs_names))
 #     [item in used_chroms for item in rna.var["chrom"]]
 # ]
 
-sc.pp.filter_genes(rna, min_counts=1)
+sc.pp.filter_genes(rna, min_counts = 1)
 rna.obs_names += "-RNA"
 
 
 scglue.data.get_gene_annotation(
-    rna, gtf="/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Annotations/gencode.vM25.chr_patch_hapl_scaff.annotation.gtf.gz",
-    gtf_by="gene_name"
+    rna, gtf = annotation_gtf,
+    gtf_by = "gene_name"
 )
 rna.var.loc[:, ["chrom", "chromStart", "chromEnd"]].head()
 
@@ -254,16 +285,23 @@ dcq_prior = dcq_prior.subgraph(hvg_reachable)
 
 
 # %%
-rna.write("/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/rna_preprocessed.h5ad", compression="gzip")
-atac.write("/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/atac_preprocessed.h5ad", compression="gzip")
+# rna.write("/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/rna_preprocessed.h5ad", compression = "gzip")
+# atac.write("/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/atac_preprocessed.h5ad", compression = "gzip")
+rna.write(f"{out_dir}/rna_preprocessed.h5ad", compression = "gzip")
+atac.write(f"{out_dir}/atac_preprocessed.h5ad", compression = "gzip")
 
 
 # %%
-nx.write_graphml(overlap_graph, "/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/overlap.graphml.gz")
-nx.write_graphml(dist_graph, "/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/dist.graphml.gz")
+# nx.write_graphml(overlap_graph, "/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/overlap.graphml.gz")
+# nx.write_graphml(dist_graph, "/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/dist.graphml.gz")
+nx.write_graphml(overlap_graph, f"{out_dir}/overlap.graphml.gz")
+nx.write_graphml(dist_graph, f"{out_dir}/dist.graphml.gz")
 
 
 # %%
-nx.write_graphml(o_prior, "/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/o_prior.graphml.gz")
-nx.write_graphml(d_prior, "/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/d_prior.graphml.gz")
-nx.write_graphml(dcq_prior, "/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/dcq_prior.graphml.gz")
+# nx.write_graphml(o_prior, "/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/o_prior.graphml.gz")
+# nx.write_graphml(d_prior, "/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/d_prior.graphml.gz")
+# nx.write_graphml(dcq_prior, "/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/dcq_prior.graphml.gz")
+nx.write_graphml(o_prior, f"{out_dir}/o_prior.graphml.gz")
+nx.write_graphml(d_prior, f"{out_dir}/d_prior.graphml.gz")
+nx.write_graphml(dcq_prior, f"{out_dir}/dcq_prior.graphml.gz")
