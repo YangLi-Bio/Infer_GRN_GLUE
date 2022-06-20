@@ -112,10 +112,10 @@ for mat in (dist, glue, qval):
 gene_peak_conn = pd.DataFrame({
     "gene": genes.index[window.row],
     "peak": peaks.index[window.col],
-    "dist": dist.data.astype(int),
+    "dist": dist.data.astype(int), # dist : two choices
     # "corr": corr.data,
-    "glue": glue.data,
-    "qval": qval.data
+    "glue": glue.data, # glue : two choices
+    "qval": qval.data # qval ; two choices
 })
 gene_peak_conn.to_pickle("/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/gene_peak_conn.pkl.gz")
 gene_peak_df = pd.DataFrame(gene_peak_conn)

@@ -128,7 +128,7 @@ combined = anndata.AnnData(
 )
 
 # %%
-sc.pp.neighbors(combined, n_pcs=50, use_rep="X_glue", metric="cosine")
+sc.pp.neighbors(combined, n_pcs=50, use_rep="X_glue", metric="cosine") # n_pcs: 50 (default), 100, and 200
 # sc.tl.umap(combined)
 
 

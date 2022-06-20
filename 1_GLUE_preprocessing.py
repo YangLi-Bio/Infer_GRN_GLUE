@@ -119,17 +119,20 @@ atac.var.head()
 genes = scglue.genomics.Bed(rna.var.assign(name=rna.var_names))
 peaks = scglue.genomics.Bed(atac.var.assign(name=atac.var_names))
 tss = genes.strand_specific_start_site()
-promoters = tss.expand(2000, 0)
+promoters = tss.expand(2000, 0) # promoter lengths: 2000 (default), 1000, and 3000
 
 
 # Preprocess RNA
 rna.layers["counts"] = rna.X.copy()
 sc.pp.highly_variable_genes(rna, n_top_genes=6000, flavor="seurat_v3")
+# flavor: seurat_v3 (default), seurat, and cell_ranger
+# n_top_genes: 6000 (default), 2000, and 3000
+
 sc.pp.normalize_total(rna)
 sc.pp.log1p(rna)
 sc.pp.scale(rna, max_value=10)
-sc.tl.pca(rna, n_comps=100, use_highly_variable=True, svd_solver="auto")
-sc.pp.neighbors(rna, n_pcs=100, metric="cosine")
+sc.tl.pca(rna, n_comps=100, use_highly_variable=True, svd_solver="auto") # n_comps: 100 (default), 50, and 200
+sc.pp.neighbors(rna, n_pcs=100, metric="cosine") # n_pcs: 100 (default), 50, and 200
 # sc.tl.umap(rna)
 
 # %%
