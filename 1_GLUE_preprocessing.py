@@ -61,6 +61,7 @@ elif org == 'mm10':
     annotation_gtf = annotation_gtf + 'gencode.vM10.annotation.gtf.gz'
 elif org == 'mm9':
     annotation_gtf = annotation_gtf + 'gencode.vM9.annotation.gtf.gz'
+    
 print('Finished loading the GTF file to annotate gene locations: ' + annotation_gtf + 
 '.\n')
 
@@ -129,6 +130,10 @@ scglue.data.get_gene_annotation(
     gtf_by = "gene_name"
 )
 rna.var.loc[:, ["chrom", "chromStart", "chromEnd"]].head()
+rna = rna[:, rna.var_names[rna.var['chrom'].notna()]]
+rna.var.loc[:, ["chrom", "chromStart", "chromEnd"]].head()
+len(rna.var)
+len(rna.obs)
 
 
 # rna

@@ -41,6 +41,7 @@ rcParams["figure.figsize"] = (4, 4)
 
 # Load data
 out_dir = sys.argv[1] # the output directory
+n_pcs = sys.argv[2] # the number of PCs from GLUE embeddings
 
 if not os.path.exists(out_dir):
     print('Creating the directory ' + out_dir + ' ...\n')
@@ -65,7 +66,7 @@ atac.X, atac.obs, atac.var
 #     f"s01_preprocessing/{PRIOR}_prior.graphml.gz"
 # )
 # prior = nx.read_graphml("/fs/ess/PCON0022/liyang/STREAM/benchmarking/GLUE/Example/o_prior.graphml.gz")
-prior = nx.read_graphml(f"{out_dir}/o_prior.graphml.gz")
+prior = nx.read_graphml(f"{out_dir}/d_prior.graphml.gz")
 
 
 # %%
@@ -73,15 +74,22 @@ prior = nx.read_graphml(f"{out_dir}/o_prior.graphml.gz")
 
 
 # %%
-rna.var["highly_variable"] = rna.var["o_highly_variable"]
-atac.var["highly_variable"] = atac.var["o_highly_variable"]
+rna.var["highly_variable"] = rna.var["d_highly_variable"]
+atac.var["highly_variable"] = atac.var["d_highly_variable"]
 rna.var["highly_variable"].sum(), atac.var["highly_variable"].sum()
+
+
+# Subset the genes and CREs
+rna = rna[:, list(set(rna.var_names) & set(prior.nodes))]
+atac = atac[:, list(set(atac.var_names) & set(prior.nodes))]
+rna.write(f"{out_dir}/rna_filtered_nodes.h5ad", compression = "gzip")
+atac.write(f"{out_dir}/atac_filtered_nodes.h5ad", compression = "gzip")
 
 
 # %%
 SEED = int(os.environ.get("SEED", "0"))
-scglue.models.configure_dataset(rna, "NB", use_highly_variable = True, use_rep="X_pca")
-scglue.models.configure_dataset(atac, "NB", use_highly_variable = True, use_rep="X_lsi")
+scglue.models.configure_dataset(rna, "NB", use_highly_variable = True, use_rep = "X_pca")
+scglue.models.configure_dataset(atac, "NB", use_highly_variable = True, use_rep = "X_lsi")
 # %% tags=[]
 
 
@@ -113,7 +121,7 @@ scglue.models.configure_dataset(atac, "NB", use_highly_variable=True, use_rep="X
 # %%
 glue = scglue.models.SCGLUEModel(
     {"rna": rna, "atac": atac}, sorted(prior.nodes),
-    random_seed=SEED
+    random_seed = SEED
 )
 glue.adopt_pretrained_model(scglue.models.load_model(
     f"{out_dir}/Pretrain.dill"
@@ -138,7 +146,7 @@ combined = anndata.AnnData(
 )
 
 # %%
-sc.pp.neighbors(combined, n_pcs=50, use_rep="X_glue", metric="cosine") # n_pcs: 50 (default), 100, and 200
+sc.pp.neighbors(combined, n_pcs = n_pcs, use_rep = "X_glue", metric = "cosine") # n_pcs: 50 (default), 100, and 200
 # sc.tl.umap(combined)
 
 

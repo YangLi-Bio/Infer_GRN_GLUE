@@ -57,8 +57,8 @@ if not os.path.exists(out_dir):
 
 
 # Load data
-rna = anndata.read_h5ad(f"{out_dir}/rna_preprocessed.h5ad")
-atac = anndata.read_h5ad(f"{out_dir}/atac_preprocessed.h5ad")
+rna = anndata.read_h5ad(f"{out_dir}/rna_filtered_nodes.h5ad")
+atac = anndata.read_h5ad(f"{out_dir}/atac_filtered_nodes.h5ad")
 
 
 # %%
