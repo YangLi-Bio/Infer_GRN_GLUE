@@ -41,7 +41,7 @@ rcParams["figure.figsize"] = (4, 4)
 
 # Load data
 out_dir = sys.argv[1] # the output directory
-n_pcs = sys.argv[2] # the number of PCs from GLUE embeddings
+n_pcs = int(sys.argv[2]) # the number of PCs from GLUE embeddings
 
 if not os.path.exists(out_dir):
     print('Creating the directory ' + out_dir + ' ...\n')
